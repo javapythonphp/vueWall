@@ -1,20 +1,25 @@
 <template>
   <div class="playerContainer">
-    <audio :src="require('@/assets/music/1.mp3')" autoplay id="audio">1</audio>
+    <audio :src="require('@/assets/music/1.mp3')"  id="audio">1</audio>
+
   </div>
 </template>
 <script>
-import { mapMutations } from 'vuex'
+import {mapMutations} from 'vuex'
 export default {
   data() {
-    return {}
+    return {
+      
+    }
   },
   getters: {},
   methods: {
     ...mapMutations(['setAudioElement'])
   },
   mounted() {
-    this.setAudioElement(document.getElementById('audio'))
+ 
+    
+      this.setAudioElement(document.getElementById('audio'))
   }
 }
 </script>
