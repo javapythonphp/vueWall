@@ -2,7 +2,11 @@
   <div class="topImg" v-show="topFlag">
     <img :src="require('@/assets/imgFlow' + curImgTop)" alt="" />
   </div>
-  <div class="movieImgFlowContainer" :class="{ movieMoveClass: flag }">
+  <div
+    class="movieImgFlowContainer"
+    :class="{ movieMoveClass: flag }"
+    ref="movieImgFlowContainer"
+  >
     <img :src="require('@/assets/imgFlow' + curImgList[0])" alt="" />
     <img :src="require('@/assets/imgFlow' + curImgList[1])" alt="" />
     <img :src="require('@/assets/imgFlow' + curImgList[2])" alt="" />
@@ -15,8 +19,8 @@
 export default {
   data() {
     return {
-      flag: true,
-      topFlag: true,
+      flag: false,
+      topFlag: false,
       ImgList: [],
       curImgList: ['', '', '', '', ''],
       curImgTop: '',
@@ -57,14 +61,9 @@ export default {
     this.start = this.ImgLen - 1
     this.forwardImg()
     this.curImgTop = this.ImgList[3]
-    setInterval(() => {
-      this.flag = !this.flag
-    }, 4000)
   },
   mounted() {
-    this.movieImgFlowContainer = document.getElementsByClassName(
-      'movieImgFlowContainer'
-    )[0]
+    this.movieImgFlowContainer = this.$refs.movieImgFlowContainer
     var thiss = this
     var setcurImgTop = function () {
       return new Promise((resolve, reject) => {
@@ -87,6 +86,9 @@ export default {
     this.movieImgFlowContainer.addEventListener('webkitAnimationStart', () => {
       hideTop()
     })
+    setInterval(() => {
+      this.flag = !this.flag
+    }, 4000)
   }
 }
 </script>
